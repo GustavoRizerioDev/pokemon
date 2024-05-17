@@ -111,10 +111,6 @@ where nome = 'Terra';
 update elemento
 set fkFraqueza = 55
 where nome = 'Dragão';
-
-SELECT * FROM elemento;
-
-select * from regiao;
                     
 insert into pokedex(nome, poder, vida, fkElemento, fkRegiao) values 
 ('Torkoal', 2000, 200, 50, 103),
@@ -125,4 +121,29 @@ insert into pokedex(nome, poder, vida, fkElemento, fkRegiao) values
 ('Charmander', 1300, 110, 50, 101),
 ('Bulbasaur', 1200, 120, 52, 102),
 ('Squirtle', 1250, 115, 51, 103),
-('Eevee', 1000, 90, 56, 104); 
+('Eevee', 1000, 90, 56, 104);
+
+
+select * from pokedex;
+select * from treinador;
+insert into time_treinador (fkpokemon, fktreinador, nivel) values
+(1,1001, 25),
+(6,1001, 30),
+(2,1002, 27),
+(7,1002, 20),
+(3, 1003, 23),
+(8, 1003, 27),
+(4, 1004, 30),
+(9, 1004, 32),
+(5, 1000, 36),
+(4, 1000, 36);
+
+select * from time_treinador;
+
+
+
+-- Primeira Batalha X Marise
+SELECT 
+poke.nome
+FROM time_treinador
+ 
