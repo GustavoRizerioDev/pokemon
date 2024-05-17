@@ -1,6 +1,6 @@
 Create database pokemon;
 use pokemon;
-
+drop database pokemon;
 
 CREATE TABLE Regiao (
   idRegiao INT NOT NULL auto_increment,
@@ -11,10 +11,10 @@ CREATE TABLE Regiao (
 CREATE TABLE Elemento (
   idElemento INT NOT NULL auto_increment,
   nome VARCHAR(45) NULL,
-  fkelemento INT NULL,
+  fkFraqueza INT NULL,
   PRIMARY KEY (idElemento),
-  CONSTRAINT fk_Elemento
-    FOREIGN KEY (fkelemento)
+  CONSTRAINT fk_fraqueza
+    FOREIGN KEY (fkFraqueza)
     REFERENCES Elemento (idElemento)
 )auto_increment = 50;
 
@@ -35,11 +35,11 @@ CREATE TABLE pokedex (
 CREATE TABLE Treinador (
   idTreinador INT NOT NULL auto_increment,
   Nome VARCHAR(45) NULL,
-  PRIMARY KEY (idTreinador)
+  fkRegiao int,
+  
+  PRIMARY KEY (idTreinador),
+  constraint fk_regiao foreign key(fkRegiao) references regiao(idRegiao)
 ) auto_increment = 1000;
-
-alter table treinador add column fkRegiao int;
-alter table treinador add constraint fk_regiao foreign key(fkRegiao) references regiao(idRegiao);
 
 create table time_treinador (
 	fkpokemon int,
@@ -68,8 +68,6 @@ values 			      ('Sapopemba'),
                   ('Ferraz de Vasconçelos'),
                   ('Taboão da Serra');
                   
-                  select * from regiao;
-                  
 insert into treinador(nome, fkRegiao)
 values 				  ('Verri', 103),
 					  ('Rosim', 104),
@@ -78,12 +76,14 @@ values 				  ('Verri', 103),
                       ('Marise', 106);
                       
 insert into elite(fktreinador, ocupacao)
-values 			 (1006, 1),
-				 (1007, 2),
-                 (1008, 3),
-                 (1009, 4);
+values 			 (1001, 1),
+				 (1002, 2),
+                 (1003, 3),
+                 (1004, 4);
                  
-insert into elemento(nome, fkelemento)
+
+                 
+insert into elemento(nome, fkFraqueza)
 values				('Fogo', NULL),
 					('Agua', NULL),
                     ('Planta', null),
@@ -93,27 +93,36 @@ values				('Fogo', NULL),
                     ('Normaç', null);
                     
 update elemento
-set fkelemento = 58
+set fkFraqueza = 51
 where nome = 'Fogo';
 
 update elemento
-set fkelemento = 60
+set fkFraqueza = 52
 where nome = 'Agua';
 
 update elemento
-set fkelemento = 57
+set fkFraqueza = 50
 where nome = 'Planta';
 
 update elemento
-set fkelemento = 58
+set fkFraqueza = 51
 where nome = 'Terra';
 
 update elemento
-set fkelemento = 62
+set fkFraqueza = 55
 where nome = 'Dragão';
 
 SELECT * FROM elemento;
-		
+
+select * from regiao;
                     
-insert into pokedex(nome, poder, vida, fkElemento, fkRegiao)
-values
+insert into pokedex(nome, poder, vida, fkElemento, fkRegiao) values 
+('Torkoal', 2000, 200, 50, 103),
+('Probopass', 1750, 205, 53, 104),
+('Dragalge', 2000, 210, 54, 106),
+('Gyarados', 1500, 150, 51, 105),
+('Mewtwo', 3000, 300, 55, 101),
+('Charmander', 1300, 110, 50, 101),
+('Bulbasaur', 1200, 120, 52, 102),
+('Squirtle', 1250, 115, 51, 103),
+('Eevee', 1000, 90, 56, 104); 
